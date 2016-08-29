@@ -1,0 +1,31 @@
+{
+  "name": "redux-demo",
+  "version": "1.0.0",
+  "description": "\"A simple redux crud demo\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "latest",
+    "body-parser": "~1.0.0",
+    "cookie-parser": "~1.0.0",
+    "express": "~4.0.0",
+    "express-cors": "0.0.3",
+    "express-session": "~1.0.0",
+    "method-override": "~1.0.0",
+    "mongoose": "^4.0.6",
+    "passport": "~0.1.17",
+    "passport-local": "~0.1.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmtimmons/redux-demo.git"
+  },
+  "author": "Michael Timmons",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cmtimmons/redux-demo/issues"
+  },
+  "homepage": "https://github.com/cmtimmons/redux-demo#readme"
+}

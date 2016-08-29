@@ -31,9 +31,15 @@ module.exports = {
 
   module: {
     loaders: [
-      { test: /\.js?$/,
-        loader: 'babel',
-        include: path.join(__dirname, 'src') },
+      {
+        test: /\.jsx?$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['react', 'es2015', 'stage-1'],
+          plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy']
+        }
+      },
       { test: /\.scss?$/,
         loader: 'style!css!sass',
         include: path.join(__dirname, 'src', 'styles') },

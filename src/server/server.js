@@ -12,7 +12,7 @@ module.exports = {
     const User = require('./models/user');
   
     
-    mongoose.connect('mongodb://localhost/flow-app');
+    mongoose.connect('mongodb://demo:demo@ds017896.mlab.com:17896/heroku_v6544g8q');
     require('./config/passport')(passport); 
 
     app.use(cookieParser()); 

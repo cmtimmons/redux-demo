@@ -4,7 +4,7 @@
   "description": "\"A simple redux crud demo\"",
   "main": "index.js",
   "scripts": {
-    "build": "NODE_ENV=production webpack --config ./webpack.prod.config.js --progress --colors",
+    "build": "webpack --config ./webpack.prod.config.js --progress --colors",
     "start": "node ./app.js"
   },
   "dependencies": {

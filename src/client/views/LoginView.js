@@ -91,7 +91,7 @@ class Login extends Component {
     const {email, password} = this.state;
     return (
       <div style={{...styles.outerContainer, backgroundColor:primary1Color}}>
-        <div style={{...styles.mainTitle}}>Brandon</div>
+        <div style={{...styles.mainTitle}}>UNC Demo</div>
         <Paper  style={styles.paper} zDepth={1} >
           <div style={styles.container}>
             <div style={{...styles.title, color:primary1Color}}>
@@ -100,7 +100,7 @@ class Login extends Component {
             <TextField
               floatingLabelText="Email"
               value={email}
-              onChange={this.handleEmailChange}
+              onChange={this._handleEmailChange}
             />
             <TextField
               floatingLabelText="Password"

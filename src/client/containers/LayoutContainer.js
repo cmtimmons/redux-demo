@@ -10,7 +10,7 @@ class Layout extends React.Component {
     if(showAppBar){
       return(
         <AppBar
-          title="Rent Manager"
+          title="Employees Demo"
           showMenuIconButton={true}
         />
       )

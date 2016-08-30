@@ -49,11 +49,13 @@ class Login extends Component {
     super(props);
     const redirectRoute = this.props.location.query.next || '/';
     this.state = {
-      email: 'test',
-      password: 'password',
+      email: '',
+      password: '',
       redirectTo: redirectRoute 
     }
     this.login = this.login.bind(this);
+    this._handleEmailChange = this._handleEmailChange.bind(this);
+    this._handlePasswordChange = this._handlePasswordChange.bind(this);
   }
   static propTypes = {
     onLoginClick: React.PropTypes.func.isRequired,
@@ -74,11 +76,22 @@ class Login extends Component {
   login(){
     this.props.onLoginClick(this.state.email, this.state.password)
   }
+  _handleEmailChange(e) {
+    this.setState({
+      email: e.target.value
+    });
+  }
+  _handlePasswordChange(e) {
+    this.setState({
+      password: e.target.value
+    });
+  }
   render() {
     const {primary1Color, alternateTextColor} = this.context.muiTheme.palette;
+    const {email, password} = this.state;
     return (
       <div style={{...styles.outerContainer, backgroundColor:primary1Color}}>
-        <div style={{...styles.mainTitle}}>Rent Pro</div>
+        <div style={{...styles.mainTitle}}>Brandon</div>
         <Paper  style={styles.paper} zDepth={1} >
           <div style={styles.container}>
             <div style={{...styles.title, color:primary1Color}}>
@@ -86,9 +99,13 @@ class Login extends Component {
             </div>
             <TextField
               floatingLabelText="Email"
+              value={email}
+              onChange={this.handleEmailChange}
             />
             <TextField
               floatingLabelText="Password"
+              value={password}
+              onChange={this._handlePasswordChange}
             />
             <div style={styles.actions}>
               <RaisedButton label="Login" primary={true} onTouchTap={this.login}/>

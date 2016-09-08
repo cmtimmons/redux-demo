@@ -1,32 +1,26 @@
 import axios from 'axios';
 /** reducer */
 const initState = {
-  username: null,
-  fetching: false,
-  fetched: false,
-  error: null
+  id: null,
+  email: null,
+  loggedIn: false
 }
 export default function reducer(state = initState, action){
   switch (action.type){
-    case "FETCH_AUTH_USER_PENDING":{
-      return {...state, fetching: true};
-    }
-    case "AUTH_USER_FULFILLED":{
-      return {
-        ...state,
-        fetching: false,
-        fetched: true,
-        username: action.payload.data.email};
+    case "USER_LOGGED_IN":{
+      return {...state, id: action.payload.id, email: action.payload.email, loggedIn: true};
     }
   }
   return state;
 }
 
 /** actions */
-export const authenticate = (email, password) => {
-
-  return {
-    type: 'AUTH_USER',
-    payload: axios.post('/api/auth/login', {email, password})
+export const userLoggedIn = (email, id) => {
+  return{
+    type: "USER_LOGGED_IN",
+    payload: {
+      email,
+      id
+    }
   }
 }

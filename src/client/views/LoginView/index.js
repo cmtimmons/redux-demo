@@ -1,5 +1,4 @@
 import React, {PropTypes, Component} from 'react';
-import { authenticate } from "../redux/auth";
 import { connect } from "react-redux";
 import TextField from 'material-ui/TextField';
 import IconButton from 'material-ui/IconButton';
@@ -8,6 +7,7 @@ import FlatButton from 'material-ui/FlatButton';
 import Paper from 'material-ui/Paper';
 import { push } from 'redux-router';
 import { bindActionCreators } from 'redux';
+import LoginForm from './LoginForm';
 const styles = {
   container : {
     display: "flex",
@@ -22,13 +22,6 @@ const styles = {
   title:{
     fontSize: "xx-large",
     marginTop: "72px"
-  },
-  actions:{
-    display:"flex", 
-    flexDirection:"row",
-    marginTop: "24px",
-    justifyContent: "flex-end",
-    marginRight: "72px"
   },
   outerContainer:{
     display: "flex",
@@ -49,13 +42,8 @@ class Login extends Component {
     super(props);
     const redirectRoute = this.props.location.query.next || '/';
     this.state = {
-      email: '',
-      password: '',
       redirectTo: redirectRoute 
     }
-    this.login = this.login.bind(this);
-    this._handleEmailChange = this._handleEmailChange.bind(this);
-    this._handlePasswordChange = this._handlePasswordChange.bind(this);
   }
   static propTypes = {
     onLoginClick: React.PropTypes.func.isRequired,
@@ -63,32 +51,8 @@ class Login extends Component {
     auth: React.PropTypes.object.isRequired,
     push: React.PropTypes.func.isRequired
   }
-  componentWillMount(){
-    if(this.props.auth.fetched){
-      this.props.push(this.state.redirectTo);
-    }
-  }
-  componentWillReceiveProps(nextProps) {
-    if(!this.props.auth.fetched && nextProps.auth.fetched){
-      this.props.push(this.state.redirectTo);
-    }
-  }
-  login(){
-    this.props.onLoginClick(this.state.email, this.state.password)
-  }
-  _handleEmailChange(e) {
-    this.setState({
-      email: e.target.value
-    });
-  }
-  _handlePasswordChange(e) {
-    this.setState({
-      password: e.target.value
-    });
-  }
   render() {
-    const {primary1Color, alternateTextColor} = this.context.muiTheme.palette;
-    const {email, password} = this.state;
+    const {primary1Color} = this.context.muiTheme.palette;
     return (
       <div style={{...styles.outerContainer, backgroundColor:primary1Color}}>
         <div style={{...styles.mainTitle}}>Redux Demo</div>
@@ -97,19 +61,7 @@ class Login extends Component {
             <div style={{...styles.title, color:primary1Color}}>
               Login
             </div>
-            <TextField
-              floatingLabelText="Email"
-              value={email}
-              onChange={this._handleEmailChange}
-            />
-            <TextField
-              floatingLabelText="Password"
-              value={password}
-              onChange={this._handlePasswordChange}
-            />
-            <div style={styles.actions}>
-              <RaisedButton label="Login" primary={true} onTouchTap={this.login}/>
-            </div>
+            <LoginForm redirectTo={this.state.redirectTo}/>
           </div>
         </Paper>
       </div>
@@ -127,7 +79,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLoginClick : (email, password) => {dispatch(authenticate(email,password))},
     push: bindActionCreators(push, dispatch)
   }
 }

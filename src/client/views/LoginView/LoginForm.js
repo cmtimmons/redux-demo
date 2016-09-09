@@ -32,7 +32,6 @@ const validate = values => {
 }
 
 const onSubmitSuccess = (result, dispatch) =>{
-  console.log("called");
   const {email, _id} = result.data;
   dispatch(userLoggedIn(email, _id));
   dispatch(push('/'))

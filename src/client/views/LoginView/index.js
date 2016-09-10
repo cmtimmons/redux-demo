@@ -46,7 +46,6 @@ class Login extends Component {
     }
   }
   static propTypes = {
-    onLoginClick: React.PropTypes.func.isRequired,
     location: React.PropTypes.object.isRequired,
     auth: React.PropTypes.object.isRequired,
     push: React.PropTypes.func.isRequired

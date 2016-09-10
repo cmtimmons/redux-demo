@@ -2,25 +2,18 @@ import React, {PropTypes, Component} from 'react';
 import { connect } from "react-redux";
 import AppBar from 'material-ui/AppBar';
 class Layout extends React.Component {
-  constructor(){
-    super();
-  }
   
-  getAppBar = (showAppBar) =>{
-    if(showAppBar){
-      return(
-        <AppBar
-          title="Employees Demo"
-          showMenuIconButton={true}
-        />
-      )
-    } 
+  static propTypes = {
+    children: React.PropTypes.node
   }
   render() {
-    const showAppBar = this.props.auth.fetched;
+    const showAppBar = this.props.auth.loggedIn;
     return (
       <div style={{height:"100%"}}>
-        {this.getAppBar(showAppBar)}
+        {showAppBar && <AppBar
+          title="Employees Demo"
+          showMenuIconButton={true}
+        />}
         {this.props.children}
       </div>
     );

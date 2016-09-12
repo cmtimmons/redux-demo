@@ -18,30 +18,36 @@ export default createFormClass({
       name: "password",
       type: "password",
       component: TextField,
-      hintText: "Password"
+      hintText: "Create a password"
+    },
+    {
+      name: "confirmPassword",
+      type: "password",
+      component: TextField,
+      hintText: "Confirm your password"
     }
   ],
-  buttons: props =>{
+  buttons: props => {
     let {handleToggleTap} = props;
-    return {
+    return{
       style: {},
       buttons: [
         {
           type: "button",
-          label: "Sign Up",
+          label: "Login",
           primary: true,
           raised: false,
           onTouchTap: handleToggleTap
         },
         {
           type: "submit",
-          label: "Login",
+          label: "Sign Up",
           primary: true,
           raised: true
         }
-    ]
-  }
-},
+      ]
+    }
+  },
   onSubmitSuccess: (result, dispatch) => {
     const {redirectTo} = result;
     const {email, _id} = result.data;
@@ -50,15 +56,15 @@ export default createFormClass({
   },
   submit: redirectTo => values => {
     const {email, password} = values;
-    return axios.post('/api/auth/login', { email, password }).then((payload) => {
+    return axios.post('/api/auth/signup', { email, password }).then((payload) => {
       return {...payload, redirectTo: redirectTo};
     }).catch(() => {
-    throw new SubmissionError({ _error: 'Invalid email or password' })
+    throw new SubmissionError({ _error: 'The email is unavailable. Please try again.' })
     })
   },
   validate: values => {
     const errors = {}
-    const requiredFields = ['email', 'password']
+    const requiredFields = ['email', 'password', 'confirmPassword']
     requiredFields.forEach(field => {
       if (!values[field]) {
         errors[field] = 'Required'
@@ -66,6 +72,9 @@ export default createFormClass({
     });
     if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
       errors.email = 'Invalid email address'
+    }
+    if (values.password && (values.password != values.confirmPassword)){
+      errors.confirmPassword = "These passwords dont match. Try agian?";
     }
     return errors
   }

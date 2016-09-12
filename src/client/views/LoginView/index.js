@@ -8,6 +8,7 @@ import Paper from 'material-ui/Paper';
 import { push } from 'redux-router';
 import { bindActionCreators } from 'redux';
 import LoginForm from './LoginForm';
+import SignUpForm from './SignUpForm';
 const styles = {
   container : {
     display: "flex",
@@ -22,7 +23,7 @@ const styles = {
   },
   title:{
     fontSize: "xx-large",
-    marginTop: "72px"
+    marginTop: "62px"
   },
   outerContainer:{
     display: "flex",
@@ -43,25 +44,35 @@ class Login extends Component {
     super(props);
     const redirectRoute = this.props.location.query.next || '/';
     this.state = {
-      redirectTo: redirectRoute 
+      redirectTo: redirectRoute,
+      isLogin: true
     }
+    this.handleToggleTap = this.handleToggleTap.bind(this);
   }
   static propTypes = {
     location: React.PropTypes.object.isRequired,
     auth: React.PropTypes.object.isRequired,
     push: React.PropTypes.func.isRequired
   }
+  handleToggleTap(){
+    let isLogin = !this.state.isLogin;
+    this.setState({isLogin});
+  }
   render() {
     const {primary1Color} = this.context.muiTheme.palette;
+    const {isLogin} = this.state;
     return (
       <div style={{...styles.outerContainer, backgroundColor:primary1Color}}>
         <div style={{...styles.mainTitle}}>Redux Demo</div>
         <Paper  style={styles.paper} zDepth={1} >
           <div style={styles.container}>
             <div style={{...styles.title, color:primary1Color}}>
-              Login
+              {isLogin ? 'Login': 'Sign Up'}
             </div>
-            <LoginForm redirectTo={this.state.redirectTo}/>
+            {isLogin ? <LoginForm handleToggleTap={this.handleToggleTap}
+                                  redirectTo={this.state.redirectTo}/>
+            :  <SignUpForm handleToggleTap={this.handleToggleTap}
+                           redirectTo={this.state.redirectTo}/>}
           </div>
         </Paper>
       </div>

@@ -52,7 +52,7 @@ const getFormComponent = config => props => {
         <form style= { styles.form } onSubmit= { handleSubmit(submit(redirectTo)) } >
             { fields.map(renderField) }
             < div style= { styles.error } > { error && <strong>{error}</strong> }</div >
-            { getButtons(buttons) }
+            { getButtons(buttons(props)) }
         </form >
     );
 }

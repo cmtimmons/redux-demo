@@ -4,9 +4,9 @@ import { userLoggedIn } from "../../redux/auth";
 import { push } from 'redux-router';
 import axios from 'axios';
 import { TextField } from 'redux-form-material-ui';
-import createForm from '../../components/FormFactory'
+import createFormClass from '../../components/FormClassFactory'
 
-export default createForm({
+export default createFormClass({
   name: "login",
   fields: [
     {

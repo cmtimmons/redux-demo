@@ -12,6 +12,7 @@ const styles = {
   container : {
     display: "flex",
     flexDirection: "column",
+    height: "100%",
     marginLeft: "72px"
   },
   paper:{

@@ -1,6 +1,4 @@
 import React, {PropTypes, Component} from 'react';
-import EmployeeListItem from './EmployeeListItem';
-import EmployeeListHead from './EmployeeListHead';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
@@ -55,6 +53,7 @@ const ActionButton = ({_showForm}) => (
     <ContentAdd />
   </FloatingActionButton>
 )
+
 ActionButton.propTypes = {
   _showForm: React.PropTypes.func.isRequired
 }
@@ -64,6 +63,7 @@ const ActionForm = ({showForm, _hideForm}) => (
     <AddEmployeeForm handleCancelTap={_hideForm}/>
   </div> : <div></div>
 )
+
 ActionForm.propTypes = {
   showForm: React.PropTypes.bool.isRequired,
   _hideForm: React.PropTypes.func.isRequired
@@ -80,6 +80,7 @@ const EmployeesList = ({employees, showForm, _showForm, _hideForm, onAddEmployee
     </div>
   </Paper>
 )
+
 EmployeesList.propTypes = {
   employees: React.PropTypes.array.isRequired,
   showForm: React.PropTypes.bool.isRequired,

@@ -48,8 +48,9 @@ export default createFormClass({
     dispatch(userLoggedIn(email, _id));
     dispatch(push(redirectTo))
   },
-  submit: redirectTo => values => {
-    const {email, password} = values;
+  submit: props => values => {
+    let {redirectTo} = props;
+    let {email, password} = values;
     return axios.post('/api/auth/login', { email, password }).then((payload) => {
       return {...payload, redirectTo: redirectTo};
     }).catch(() => {

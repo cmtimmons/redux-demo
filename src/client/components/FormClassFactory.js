@@ -47,9 +47,10 @@ const renderField = (field, index) => {
 
 const getFormComponent = config => props => {
     const { fields, buttons, name, submit} = config;
-    const {handleSubmit, error, redirectTo} = props;
+    const {handleSubmit, error} = props;
     return (
-        <form style= { styles.form } onSubmit= { handleSubmit(submit(redirectTo)) } >
+        <form style= { styles.form } 
+              onSubmit= { submit ? handleSubmit(submit(props)) : ()=>{} } >
             { fields.map(renderField) }
             < div style= { styles.error } > { error && <strong>{error}</strong> }</div >
             { getButtons(buttons(props)) }
@@ -59,6 +60,9 @@ const getFormComponent = config => props => {
 
 export default function createForm(form) {
     let {onSubmitSuccess, validate, name, ...config} = form;
+    if (!onSubmitSuccess){
+        onSubmitSuccess = ()=>{}
+    }
     return reduxForm({
         form: name,
         onSubmitSuccess,

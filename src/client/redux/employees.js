@@ -1,4 +1,5 @@
 const initState = {
+  showForm: false,
   list: [
     {
       id: 123456,
@@ -14,6 +15,14 @@ const initState = {
 }
 export default function reducer(state = initState, action){
   switch (action.type){
+    case "SHOW_FORM":{
+      let showForm = true;
+      return {...state, showForm}
+    }
+    case "HIDE_FORM":{
+      let showForm = false;
+      return {...state, showForm}
+    }
     case "ADD_EMPLOYEE":{
       const list = [...state.list, {...action.payload}];
       return {...state, list};
@@ -48,5 +57,15 @@ export const deleteEmployee = (id) => {
     payload: {
       id
     }
+  }
+}
+export const showForm = () => {
+  return{
+    type: "SHOW_FORM"
+  }
+}
+export const hideForm = () => {
+  return{
+    type: "HIDE_FORM"
   }
 }

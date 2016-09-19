@@ -28,7 +28,7 @@ const renderCell = (cell, index) => (<div key={index} style={defaultStyles.rowCe
 
 const renderRow = (row, index) => (<div key={index} style={defaultStyles.row}>{row.map(renderCell)}</div>)
 
-const renderHeader = (header, index) => (<div key={index} style={defaultStyles.headerCell}>Name</div>)
+const renderHeader = (header, index) => (<div key={index} style={defaultStyles.headerCell}>{header}</div>)
 
 const SimpleTable = ({headers, rows}) => (
   <div>
